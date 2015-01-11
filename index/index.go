@@ -19,4 +19,9 @@ func (i *Index) Get(id string) *Doc {
     return i.docs[id]
 }
 
+func (i *Index) Delete(id string) error {
+	delete(i.docs, id)
+	return nil
+}
+
 
