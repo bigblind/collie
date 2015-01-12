@@ -51,3 +51,24 @@ func TestDeletingADoc(t *testing.T){
 		t.Fatalf("expected the result of getting a deleted doc to be nil, got %v", result)
 	}
 }
+
+func TestEmptySearchEmptyIndex(t *testing.T){
+	index := NewIndex("index")
+	result := index.Searchs("")
+	if (len(result) != 0){
+		t.Fatalf("An empty search of an empty index should return results of length 0.")
+	}
+}
+
+func TestEmptySearchOnIndexWithDoc(t *testing.T){
+	index := NewIndex("index")
+	type x struct{}
+	doc1 := NewDoc("doc1", x{})
+	doc2 := NewDoc("doc2", x{})
+	index.Put(&doc1)
+	index.Put(&doc2)
+	result := index.Searchs("")
+	if(len(result) != 2){
+		t.Fatalf("Expected search to return 2 results, got %v", result)
+	}
+}

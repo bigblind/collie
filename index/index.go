@@ -24,4 +24,12 @@ func (i *Index) Delete(id string) error {
 	return nil
 }
 
+func(i *Index) Searchs(query string) []Doc {
+	r := []Doc{}
+	for _, doc := range i.docs {
+		r = append(r, *doc)
+	}
+	return r
+}
+
 
